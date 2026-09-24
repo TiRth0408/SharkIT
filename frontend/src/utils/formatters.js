@@ -1,0 +1,15 @@
+export const formatINR = (amount) => {
+  return Number(amount).toLocaleString('en-IN');
+};
+
+export const getRelativeTime = (timestamp) => {
+  if (!timestamp) return 'Recent';
+  const diffMs = new Date() - new Date(timestamp);
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  const diffHours = Math.floor(diffMins / 60);
+  if (diffHours < 24) return `${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  return `${diffDays}d ago`;
+};
