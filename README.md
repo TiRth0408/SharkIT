@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS deals (
   amount_sought  INT UNSIGNED                 NOT NULL,
   equity_offered DECIMAL(5,2)                 DEFAULT NULL,
   created_at     TIMESTAMP                    DEFAULT CURRENT_TIMESTAMP
-);
+  INDEX idx_funding_type (funding_type),
+  INDEX idx_created_at (created_at DESC)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 ```
 
 ---
@@ -82,16 +84,24 @@ DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=sharkit_db
 ```
-
-### `frontend/.env` (optional)
+### Backend (`backend/.env` or Render Dashboard)
 
 ```env
-VITE_API_URL=http://localhost:4000/api
+PORT=4000
+DB_HOST=mysql-626e09e-sharkit-account.aivencloud.com
+DB_PORT=your_aiven_port
+DB_USER=avnadmin
+DB_PASSWORD=your_aiven_password
+DB_NAME=sharkit_db
+DB_SSL={"rejectUnauthorized":false}
 ```
 
-If omitted, the frontend defaults to `http://localhost:4000/api`.
+### Frontend (`.env.production` / `.env`)
 
----
+```env
+VITE_API_URL=https://sharkit.onrender.com/api
+```
+
 
 ## Getting Started
 
